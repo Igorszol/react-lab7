@@ -11,8 +11,8 @@ class AddForm extends React.Component
           parentphone:"",
           name:"",
           email: "",
-          phoneIsValid:true,
-          emailIsValid:true
+          phoneIsValid:false,
+          emailIsValid:false,
           }
         this.ageChanged = this.ageChanged.bind(this);
         this.parentnameChanged = this.parentnameChanged.bind(this);
@@ -24,7 +24,7 @@ class AddForm extends React.Component
        
         this.emailValidation=this.emailValidation.bind(this);
         this.numberValidation=this.numberValidation.bind(this);
-        this.Validation=this.Validation.bind(this);
+
         }
 
         
@@ -34,6 +34,7 @@ class AddForm extends React.Component
         
         parentnameChanged(event) {
           this.setState({ parentname: event.target.value });
+
         }
         parentphoneChanged(event) {
           this.setState({ parentphone: event.target.value });
@@ -44,21 +45,21 @@ class AddForm extends React.Component
 
     emailChanged(event) {
         this.setState({ email: event.target.value });
+
     }
 
-    numberValidation(){
+    numberValidation(event){
       const phoneNumberPattern = /[0-9]{9}/;
-      this.setState({ phoneIsValid:phoneNumberPattern.test(this.state.parentphone)})
+      this.setState({ phoneIsValid:phoneNumberPattern.test(event.target.value)})
+ 
     }
-    emailValidation(){
+    emailValidation(event){
       const emailPattern =/[a-zA-Z0-9-]{3,}@[a-zA-Z0-9-]{3,}[.]{1}[a-zA-Z]{2,}/;
-      this.setState({ emailIsValid:emailPattern.test(this.state.email)});
+      this.setState({ emailIsValid:emailPattern.test(event.target.value)});
+   
     }
     
-    Validation(event){
-      this.numberValidation();
-      this.emailValidation();
-    }
+   
 
     render(){
         return(
@@ -75,8 +76,8 @@ class AddForm extends React.Component
           </div>
           <div style={{margin:"5px"}}>
           <label style={{ marginLeft:"10%"}}>Parent Phone: </label>
-          <input style={{position:"realtive", marginLeft:"35%"}} type="text" value={this.state.parentphone} onChange={this.parentphoneChanged}></input>
-          {this.state.phoneIsValid ? null : <label style={{color:"red", marginLeft:"5px"}}>NIE GIT</label>}
+          <input style={{position:"realtive", marginLeft:"35%"}} type="text" value={this.state.parentphone} onChange={(event)=>{this.parentphoneChanged(event);this.numberValidation(event);}}></input>
+          {this.state.phoneIsValid ? null : <label style={{color:"red", marginLeft:"5px"}}>Incorrect number</label>}
           </div>
           </div>
           :
@@ -87,11 +88,11 @@ class AddForm extends React.Component
           </div>
           <div style={{margin:"5px"}}>
           <label style={{ marginLeft:"10%"}}>Email: </label>
-          <input style={{position:"realtive", marginLeft:"35%"}} type="text" value={this.state.email} onChange={this.emailChanged}></input>
-          {this.state.emailIsValid ? null : <label style={{color:"red", marginLeft:"5px"}}>NIE GIT</label>}
+          <input style={{position:"realtive", marginLeft:"35%"}} type="text" value={this.state.email} onChange={(event)=>{this.emailChanged(event);this.emailValidation(event);}}></input>
+          {this.state.emailIsValid ? null : <label style={{color:"red", marginLeft:"5px"}}>Incorrect email</label>}
           </div>
          </div>}
-         <button style={{ position:"relative", left:"45%", margin:"10px"}} type="submit" onClick={this.Validation}>Submit</button>
+         <button style={{ position:"relative", left:"45%", margin:"10px"}} type="submit" disabled={this.state.age<18 ? !this.state.phoneIsValid : !this.state.emailIsValid}>Submit</button>
             </div>
         )}
 
