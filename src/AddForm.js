@@ -57,6 +57,7 @@ class AddForm extends React.Component
           <p><label style={{ position:"relative", left:"10%"}}>Name: </label><input style={{position:"absolute", left:"50%"}} type="text" value={this.state.name} onChange={this.nameChanged}></input></p>
           <p><label style={{ position:"relative", left:"10%"}}>Email: </label><input style={{position:"absolute", left:"50%"}} type="text" value={this.state.email} onChange={this.emailChanged}></input></p>
          </div>}
+         <button style={{ position:"relative", left:"45%", margin:"20px"}}>Submit</button>
             </div>
         )}
 
