@@ -6,78 +6,56 @@ class AddForm extends React.Component
     {
         super(props);
         this.state = {
-          name: "",
-          age: "",
-          company: "",
-          email: "",
-          isActive: false,
-            isVisible: false
+          age: "1",
+          parentname:"",
+          parentphone:"",
+          name:"",
+          email: ""
           }
-          this.handleAddVisible=this.handleAddVisible.bind(this);
-          this.handleAddInvisible=this.handleAddInvisible.bind(this);
-          this.nameChanged = this.nameChanged.bind(this);
         this.ageChanged = this.ageChanged.bind(this);
-        this.companyChanged = this.companyChanged.bind(this);
+        this.parentnameChanged = this.parentnameChanged.bind(this);
+        this.parentphoneChanged = this.parentphoneChanged.bind(this);
+
+        this.nameChanged = this.nameChanged.bind(this);
         this.emailChanged = this.emailChanged.bind(this);
-        this.isActiveChanged = this.isActiveChanged.bind(this);
+       
 
         }
 
-    handleAddVisible (event) {
-        this.setState({
-          name: "",
-          age: "",
-          company: "",
-          email: "",
-          isActive: false,
-            isVisible: true
-        });
-      }
-      handleAddInvisible (event) {
-        this.setState({isVisible: false});
-      }
-
-      nameChanged(event) {
-        this.setState({ name:event.target.value });
-    }
-
-    ageChanged(event) {
-        this.setState({ age:event.target.value });
-    }
-
-    companyChanged(event) {
-        this.setState({ company: event.target.value });
-    }
+        
+        ageChanged(event) {
+          this.setState({ age:event.target.value });
+        }
+        
+        parentnameChanged(event) {
+          this.setState({ parentname: event.target.value });
+        }
+        parentphoneChanged(event) {
+          this.setState({ parentphone: event.target.value });
+        }
+        nameChanged(event) {
+              this.setState({ name:event.target.value });
+            }
 
     emailChanged(event) {
         this.setState({ email: event.target.value });
     }
 
-    isActiveChanged(event) {
-        this.setState({ isActive:event.target.value });
-    }
-
-
 
 
     render(){
         return(
-          <div style= {{border:"2px solid black"}}>
-          {this.state.isSaving ? <p>Saving...</p> :
+          <div style= {{border:"2px solid black", position:"absolute, centre", margin:"10%"}}>
+          <p><label style={{ position:"relative", left:"10%"}}>Age: </label><input style={{position:"absolute", left:"50%"}} type="number" value={this.state.age} onChange={this.ageChanged}></input></p>
+          {this.state.age<18 ? 
           <div>
-            <button onClick={this.handleAddVisible}>Add Employee</button>
-            {this.state.isVisible ?  
-            <form>
-                <p>ID: <input disabled></input></p>
-                <p>Name: <input name="name" type="text" value={this.state.name} onChange={this.nameChanged}></input></p>
-                <p>Age: <input name="age" type="number" value={this.state.age} onChange={this.ageChanged}></input></p>
-                <p>Company: <input name="company" type="text" value={this.state.company} onChange={this.companyChanged}></input></p>
-                <p>Email: <input name="email" type="text" value={this.state.email} onChange={this.emailChanged}></input></p>
-                <p>IsActive: <input name="isActive" type="checkbox" defaultChecked={this.state.isActive} onChange={this.isActiveChanged}></input></p>
-                
-                <button onClick={() => this.props.submitClicked(this.state.name,this.state.age,this.state.company,this.state.email,this.state.isActive)}>Add</button>
-                <button onClick={this.handleAddInvisible}>Cancel</button>
-            </form>:null}
+          <p><label style={{ position:"relative", left:"10%"}}>Parent Name: </label><input style={{position:"absolute", left:"50%"}} type="text" value={this.state.parentname} onChange={this.parentnameChanged}></input></p>
+          <p><label style={{ position:"relative", left:"10%"}}>Parent Phone: </label><input style={{position:"absolute", left:"50%"}} type="number" value={this.state.parentphone} onChange={this.parentphoneChanged}></input></p>
+          </div>
+          :
+          <div>
+          <p><label style={{ position:"relative", left:"10%"}}>Name: </label><input style={{position:"absolute", left:"50%"}} type="text" value={this.state.name} onChange={this.nameChanged}></input></p>
+          <p><label style={{ position:"relative", left:"10%"}}>Email: </label><input style={{position:"absolute", left:"50%"}} type="text" value={this.state.email} onChange={this.emailChanged}></input></p>
          </div>}
             </div>
         )}
