@@ -49,7 +49,7 @@ class AddForm extends React.Component
     }
 
     numberValidation(event){
-      const phoneNumberPattern = /[0-9]{9}/;
+      const phoneNumberPattern = /^[0-9]{9}$/;
       this.setState({ phoneIsValid:phoneNumberPattern.test(event.target.value)})
  
     }
@@ -66,7 +66,7 @@ class AddForm extends React.Component
           <div style= {{border:"2px solid black", position:"absolute, centre", margin:"10%"}}>
           <div style={{margin:"5px"}}>
           <label style={{ marginLeft:"10%"}}>Age: </label>
-          <input style={{position:"realtive", marginLeft:"35%"}} type="number" value={this.state.age} onChange={this.ageChanged}></input>
+          <input style={{position:"realtive", marginLeft:"35%"}} type="number" min="1" max="150" value={this.state.age} onChange={this.ageChanged}></input>
           </div>
           {this.state.age<18 ? 
           <div>
